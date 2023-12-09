@@ -41,54 +41,48 @@ class Charge:
     def __truediv__(self, other): pass
 
 
-def force(q1, q2, pos1, pos2):
+def force(charge1: Charge, charge2: Charge) -> vector:
     """
 
-    :param q1:
-    :param q2:
-    :param pos1:
-    :param pos2:
+    :param charge1:
+    :param charge2:
     :return:
     """
     # Calculates and returns value of the force
-    return k * q1 * q2 * (pos1 - pos2) / ((mag(pos1 - pos2)) ** 3)
+    return k * charge1.q * charge2.q * (charge1.pos - charge2.pos) / ((mag(charge1.pos - charge2.pos)) ** 3)
 
 
-def e_field(q1, pos1, pos2):
+def e_field(charge: Charge, pos: vector) -> vector:
     """
 
-    :param q1:
-    :param pos1:
-    :param pos2:
+    :param charge:
+    :param pos:
     :return:
     """
     # Calculates and returns value of the e-field
-    return k * q1 * (pos1 - pos2) / ((mag(pos1 - pos2)) ** 3)
+    return k * charge.q * (charge.pos - pos) / ((mag(charge.pos - pos)) ** 3)
 
 
-def e_pot_energy(q1, q2, pos1, pos2):
+def e_pot_energy(charge1: Charge, charge2: Charge) -> vector:
     """
 
-    :param q1:
-    :param q2:
-    :param pos1:
-    :param pos2:
+    :param charge1:
+    :param charge2:
     :return:
     """
     # Calculates and returns value of the potential energy
-    return k * q1 * q2 / mag(pos1 - pos2)
+    return k * charge1.q * charge2.q / mag(charge1.pos - charge2.pos)
 
 
-def e_pot(q1, pos1, pos2):
+def e_pot(charge: Charge, pos: vector) -> vector:
     """
 
-    :param q1:
-    :param pos1:
-    :param pos2:
+    :param charge:
+    :param pos:
     :return:
     """
     # Calculates amd returns the value of the electric potential
-    return k * q1 / mag(pos1 - pos2)
+    return k * charge.q / mag(charge.pos - pos)
 
 
 PROTON = Charge(1.602176634e-19, 0, 1.672621777e-27)
@@ -97,7 +91,7 @@ ELECTRON = Charge(-1.602176634e-19, 0, 9.10938291e-31)
 
 
 def main():
-    f = force(charge_proton, charge_proton, vector(0,0,0), vector(-4e-15,0,0))
+    f = force(, charge_proton, vector(0,0,0), vector(-4e-15,0,0))
     print(mag(f))
 
 
